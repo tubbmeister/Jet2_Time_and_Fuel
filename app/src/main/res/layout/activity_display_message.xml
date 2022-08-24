@@ -315,7 +315,9 @@
         android:layout_width="135dp"
         android:layout_height="65dp"
         android:layout_marginEnd="16dp"
+        android:textColor="@color/colorPrimaryDark"
         android:onClick="Reset"
+        android:textStyle="bold"
         android:text="Reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
