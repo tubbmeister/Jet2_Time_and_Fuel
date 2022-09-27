@@ -209,7 +209,7 @@
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="50dp"
         android:onClick="StartCalculator"
         android:text="Standard Calculator"
         android:textSize="30sp"
@@ -222,9 +222,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
-        android:text="V 5.0 "
+        android:text="V 6.0 "
         android:textColor="#0B0A0A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/SavedNumber"
+        android:layout_width="155dp"
+        android:layout_height="40dp"
+        android:textIsSelectable="true"
+
+        android:editable="true"
+        android:gravity="center_vertical"
+        android:text="Saved"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/simpleTableLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

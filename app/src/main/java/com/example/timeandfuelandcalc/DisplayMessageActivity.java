@@ -99,6 +99,7 @@ public class DisplayMessageActivity extends AppCompatActivity implements View.On
         CalcUplift.setText("");
         SpecificGravity.setText("");
         ExpectedLitres.setText("");
+        ActualLitres.setText("");
 
 
 

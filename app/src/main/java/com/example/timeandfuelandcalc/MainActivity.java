@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     int minuteFirstFromString;
     int hourFirstFromString,hourFirstFromString1,minuteFirstFromString1;
     EditText numberEntry;
+    TextView SavedNumber;
+    String SavedTime;
 
 
     public static final String EXTRA_MESSAGE = "com.example.totaltime.MESSAGE";
@@ -32,8 +34,10 @@ public class MainActivity extends AppCompatActivity {
         TextView Number1 = findViewById(R.id.hours1);
        // Number1.setText("" + value1);
         TextView Number2 = findViewById(R.id.hours2);
+
        // Number2.setText("" + value2);
         numberEntry = findViewById(R.id.numberEntry);
+         SavedNumber = findViewById(R.id.SavedNumber);
 
         numberEntry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     // do something in response to button
 
-    public void onSubmitClick (View view){
+    public void onSubmitClick (View view){ //hours calc
         TextView Answer = findViewById(R.id.resultView);
         //EditText Attempt = findViewById(R.id.numberEntry);
         TextView Result= findViewById(R.id.TotalMinutesView);
@@ -208,9 +212,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if (a < 10) {
                     finalMinutes.setText(String.valueOf("0" + a));
+                    SavedNumber.setText(String.valueOf(b)+"."+String.valueOf("0"+a));
                 } else {
                     finalMinutes.setText(String.valueOf(a));
+                    SavedNumber.setText(String.valueOf(b)+"."+String.valueOf(a));
                 }
+                //SavedTime=(finalHours+"."+finalMinutes);
+
 
             InputMethodManager inputManager = (InputMethodManager)
                     getSystemService(Context.INPUT_METHOD_SERVICE);
