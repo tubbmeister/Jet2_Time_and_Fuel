@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -247,8 +248,39 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        // Fetching the stored data
+        // from the SharedPreference
+        SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
+        String s1 = sh.getString("storedTime", "");
+       // int a = sh.getInt("age", 0);
+
+        // Setting the fetched data
+        // in the EditTexts
+        SavedNumber.setText(s1);
+        //age.setText(String.valueOf(a));
     }
+
+        @Override
+    protected void onPause(){
+
+        super.onPause();
+
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+            SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+            // write all the data entered by the user in SharedPreference and apply
+            myEdit.putString("storedTime", SavedNumber.getText().toString());
+           // myEdit.putInt("age", Integer.parseInt(age.getText().toString()));
+            myEdit.apply();
+        }
+
+        }
+
+    
 
 
