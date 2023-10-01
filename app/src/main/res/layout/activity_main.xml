@@ -68,22 +68,21 @@
         android:id="@+id/button2"
         android:layout_width="343dp"
         android:layout_height="61dp"
-        android:layout_marginTop="20dp"
 
         android:onClick="onSubmitClick"
+
         android:text="Hours Calculator"
         android:textSize="30sp"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@+id/numberEntry" />
+        app:layout_constraintTop_toBottomOf="@+id/simpleTableLayout" />
 
     <EditText
         android:id="@+id/numberEntry"
-        android:layout_marginTop="20dp"
         android:layout_width="250dp"
         android:layout_height="47dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/border"
 
         android:ems="10"
@@ -132,13 +131,13 @@
 
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:measureWithLargestChild="true"
+        android:layout_marginTop="24dp"
 
+        android:measureWithLargestChild="true"
         android:stretchColumns="*"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hours2"> <!-- stretch the second column of the layout-->
+        app:layout_constraintTop_toBottomOf="@+id/numberEntry"> <!-- stretch the second column of the layout-->
 
         <!-- first row of the table layout-->
 
@@ -149,6 +148,7 @@
             android:background="#BA2015"
             android:gravity="center"
             android:padding="1dp"
+
             android:weightSum="1">
 
             <!-- first element of the row-->
@@ -207,22 +207,21 @@
 
     <Button
         android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="315dp"
+        android:layout_height="54dp"
         android:onClick="StartCalculator"
         android:text="Standard Calculator"
-        android:textSize="30sp"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simpleTableLayout" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
-        android:text="V 6.0 "
+        android:text="V 7.0 "
         android:textColor="#0B0A0A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
@@ -239,8 +238,56 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simpleTableLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/hours1" />
+
+    <EditText
+        android:id="@+id/Takeoff"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:hint="Take Off"
+        android:inputType="time"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SavedNumber" />
+
+    <EditText
+        android:id="@+id/Landing"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:hint="Landing"
+        android:inputType="time"
+        app:layout_constraintBottom_toBottomOf="@+id/Takeoff"
+        app:layout_constraintStart_toEndOf="@+id/Takeoff"
+        app:layout_constraintTop_toTopOf="@+id/Takeoff" />
+
+    <TextView
+        android:id="@+id/Result"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:text=""
+        android:gravity="center_vertical"
+        android:textAlignment="center"
+        android:hint="Total"
+        android:textAllCaps="false"
+        android:textColor="#0C0C0C"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/Landing"
+        app:layout_constraintTop_toTopOf="@+id/Landing" />
+
+    <Button
+        android:id="@+id/DurationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Calculate_Duration"
+        android:text="Flt Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.797"
+        app:layout_constraintStart_toEndOf="@+id/SavedNumber"
+        app:layout_constraintTop_toTopOf="@+id/SavedNumber" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

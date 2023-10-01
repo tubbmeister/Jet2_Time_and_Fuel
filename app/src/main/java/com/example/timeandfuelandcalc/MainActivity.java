@@ -7,12 +7,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.ParseException;
+import java.time.LocalTime;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     double value1 =5;
     double value2 = 10;
@@ -23,6 +28,12 @@ public class MainActivity extends AppCompatActivity {
     EditText numberEntry;
     TextView SavedNumber;
     String SavedTime;
+    EditText Takeoff, Landing;
+    TextView Result;
+    Button Calculate_Flight_Time;
+    LocalTime First_Time,Second_Time,Duration;
+
+    LocalTime difference;
 
 
     public static final String EXTRA_MESSAGE = "com.example.totaltime.MESSAGE";
@@ -39,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
        // Number2.setText("" + value2);
         numberEntry = findViewById(R.id.numberEntry);
          SavedNumber = findViewById(R.id.SavedNumber);
+        Takeoff=findViewById(R.id.Takeoff);
+        Landing=findViewById(R.id.Landing);
+        Result=findViewById(R.id.Result);
+        Takeoff.setOnClickListener(this);
+        Landing.setOnClickListener(this);
 
         numberEntry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +65,52 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void Calculate_Duration (View view) throws ParseException {
 
+
+        String TakeoffTime=Takeoff.getText().toString();
+        if(TextUtils.isEmpty(TakeoffTime)){
+            Takeoff.setError("Add Time!");
+        }
+        String LandingTime=Landing.getText().toString();
+        if(TextUtils.isEmpty(LandingTime)){
+            Landing.setError("Add Time!");
+            return;
+        }
+
+        int i = LandingTime.length(); // NB time must have $ digits ie 03:30 not 3:30
+        if (i<5){
+            LandingTime=("0"+LandingTime);
+
+        }
+        int j = TakeoffTime.length();
+        if (j<5){
+            TakeoffTime=("0"+TakeoffTime);
+        }
+        First_Time=LocalTime.parse(TakeoffTime);
+        Second_Time=LocalTime.parse(LandingTime);
+        int value=Second_Time.compareTo(First_Time);
+        if (value<0){
+
+            Second_Time=Second_Time.plusHours(24); //copes if landing after midnight
+        }
+
+        difference=Second_Time.minusHours( First_Time.getHour()).minusMinutes(First_Time.getMinute());
+
+        Result.setText(difference.toString());
+
+    }
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.Takeoff:
+                Takeoff.getText().clear(); //nb must add ""android.nonFinalResIds=false" to gradle.properties
+                break;
+            case R.id.Landing:
+                Landing.getText().clear();
+                break;
+        }
+
+    }
 
 
 
