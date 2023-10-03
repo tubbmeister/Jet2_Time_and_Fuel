@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalTime;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -28,10 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText numberEntry;
     TextView SavedNumber;
     String SavedTime;
-    EditText Takeoff, Landing;
-    TextView Result;
+    EditText Takeoff, Landing,addFltTime;
+    TextView Result,TotalHoursView;
     Button Calculate_Flight_Time;
-    LocalTime First_Time,Second_Time,Duration;
+    LocalTime First_Time,Second_Time;
 
     LocalTime difference;
 
@@ -47,8 +49,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
        // Number1.setText("" + value1);
         TextView Number2 = findViewById(R.id.hours2);
 
+
        // Number2.setText("" + value2);
         numberEntry = findViewById(R.id.numberEntry);
+        addFltTime=findViewById(R.id.addFltTime);
          SavedNumber = findViewById(R.id.SavedNumber);
         Takeoff=findViewById(R.id.Takeoff);
         Landing=findViewById(R.id.Landing);
@@ -141,174 +145,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // do something in response to button
 
-    public void onSubmitClick (View view){ //hours calc
-        TextView Answer = findViewById(R.id.resultView);
-        //EditText Attempt = findViewById(R.id.numberEntry);
-        TextView Result= findViewById(R.id.TotalMinutesView);
-        String tester=numberEntry.getText().toString();
-        TextView firstHour = findViewById(R.id.hours1);
-        TextView firstMinute = findViewById(R.id.minutes1);
-        TextView firstHour2 = findViewById(R.id.hours2);
-        TextView firstMinute2 = findViewById(R.id.minutes2);
-        TextView finalHours = findViewById(R.id.TotalHoursView);
-        TextView finalMinutes = findViewById(R.id.TotalMinutesView);
-        if (tester.matches("")){
-            return; //checks that there is data in the field
+    public void onSubmitClick (View view)throws ParseException{ //hours calc cannot use "time" for numbers bigger than 24:00!
+
+        String dateTime;
+
+        SimpleDateFormat simpleDateFormat;
+        simpleDateFormat=new SimpleDateFormat("HH:mm");
+
+        TextView TotalHoursView=findViewById(R.id.TotalHoursView);
+
+        String TotalFlightTime=numberEntry.getText().toString();
+        if(TextUtils.isEmpty(TotalFlightTime)){
+            numberEntry.setError("Add Time!");
+        }
+        String newFltTime=addFltTime.getText().toString();
+        if(TextUtils.isEmpty(newFltTime)){
+            addFltTime.setError("Add Time!");
+            return;
         }
 
-       double userAnswer = Double.parseDouble(numberEntry.getText().toString());
-       // int userAnswer = Integer.parseInt(Attempt.getText().toString());
-        if(userAnswer == value1+value2) {
-            Answer.setText("Correct!");
-
-        } else {
-           // Answer.setText("Wrong, the correct answer was: " + (value1+value2));
-        }
-        if (i>2) {firstHour.setText("");
-                    firstMinute.setText("");
-                    firstHour2.setText("");
-                    firstMinute2.setText("");
-                    finalHours.setText("");
-                    finalMinutes.setText("");
-            firstMinute.setTextColor(Color.parseColor("#0B0A0A")); //back to black
-                firstHour2.setTextColor(Color.parseColor("#0B0A0A")); //original numbers
-                firstHour.setTextColor(Color.parseColor("#0B0A0A"));
-                firstMinute2.setTextColor(Color.parseColor("#0B0A0A"));
-
-
-            i=0;}
-
-        if (i==2) {firstMinute.setTextColor(Color.parseColor("#9A9A9A")); //greys out
-            firstHour2.setTextColor(Color.parseColor("#9A9A9A")); //original numbers
-            firstHour.setTextColor(Color.parseColor("#9A9A9A"));
-            firstMinute2.setTextColor(Color.parseColor("#9A9A9A"));
-
-
-
-
+        int i = newFltTime.length(); // NB time must have $ digits ie 03:30 not 3:30
+        if (i<5){
+            newFltTime=("0"+newFltTime);
 
         }
-        if(i==0) {
-            first=userAnswer;
-            String xHour = numberEntry.getText().toString();
-            String[] separated = xHour.split("\\.");
-             hourFirstFromString = Integer.parseInt(separated[0]);
-             minuteFirstFromString = Integer.parseInt(separated[1]);
+      //  int j = TakeoffTime.length();
+     //   if (j<5){
+      //      TakeoffTime=("0"+TakeoffTime);
+      //  }
+      //  Duration initialDuration= java.time.Duration.ofHours(2).plusMinutes(34);
+       // String timeString = "01:02";
+        String isoDurationString = TotalFlightTime.replaceFirst("(\\d+):(\\d{2})", "PT$1H$2M");
 
-             if (minuteFirstFromString>59){
-                //numberEntry.setText("CHECK MINUTES!"); //capture error
+        Duration dur = Duration.parse(isoDurationString);
+       // First_Time=LocalTime.parse(TotalFlightTime);
+        String isoDurationString1 = newFltTime.replaceFirst("(\\d+):(\\d{2})", "PT$1H$2M");
 
-                     numberEntry.setError("Check Minutes!");
+        Duration dur1 = Duration.parse(isoDurationString1);
+       // Second_Time=LocalTime.parse(newFltTime);
+        //int value=Second_Time.compareTo(First_Time);
+       // if (value<0){
 
+      //      Second_Time=Second_Time.plusHours(24); //copes if landing after midnight
+     //   }
+        dur=dur.plus(dur1);
 
+      //  difference=Second_Time.plusHours( dur.getHour()).plusMinutes(First_Time.getMinute());
+        long totalMinutes=dur.toMinutes();
+        int totalMinutesInt= (int) totalMinutes;
+        int totalHours=(totalMinutesInt/60);
+        int totalMinutesResult=(totalMinutesInt-(totalHours*60));
+        String HoursFinal=Integer.toString(totalHours);
+        String MinutesFinal=Integer.toString(totalMinutesResult);
 
-                 return;
-             }
-
-
-            int infrontOfDecimal = ((int)first); // remove numbers after decimal
-            double FirstHours=infrontOfDecimal; //convert to double
-
-           double FirstMinutes = ((first - FirstHours)*100); //convert decimal minutes to minutes
-
-           int IntFirstHour = (int)FirstHours; //convert double to int for display
-            int IntFirstMinute = (int)FirstMinutes; //convert double to int for display
-            firstHour.setText(String.valueOf(IntFirstHour));
-            numberEntry.requestFocus();
-
-            firstHour.setText(String.valueOf(hourFirstFromString)+" :");
-
-            if (minuteFirstFromString <10){
-                firstMinute.setText(String.valueOf("0"+minuteFirstFromString));// show first hours
-
-            }
-            else {
-                firstMinute.setText(String.valueOf(minuteFirstFromString));// show first hours
-            }
-            i++;
-
-            numberEntry.requestFocus();
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(numberEntry, InputMethodManager.SHOW_FORCED); //keeps keyboard visible
-        } else {
-            second=userAnswer;
-
-
-
-
-            String xHour = numberEntry.getText().toString();
-            String[] separated = xHour.split("\\.");
-             hourFirstFromString1 = Integer.parseInt(separated[0]);
-             minuteFirstFromString1 = Integer.parseInt(separated[1]);
-            if (minuteFirstFromString1>59){
-               //23 numberEntry.setText("CHECK MINUTES!"); //capture error
-                numberEntry.setError("Check Minutes!");
-                return;
-            }
-         //   TextView secondNumber = findViewById(R.id.hours2);
-            String stringdouble= Double.toString(userAnswer);
-        //    secondNumber.setText(stringdouble);
-            firstHour2.setText(String.valueOf(hourFirstFromString1)+" :");
-
-            if (minuteFirstFromString1 <10){
-                firstMinute2.setText(String.valueOf("0"+minuteFirstFromString1));// show first hours
-            }
-            else {
-                firstMinute2.setText(String.valueOf(minuteFirstFromString1));// show first hours
-                // firstMinute.setText(String.valueOf(minuteFirstFromString1));// show first hours
-            }
-
-                //do calculation
-                double totalMinutes = ((minuteFirstFromString1 + minuteFirstFromString));
-                double divideBySixty = (totalMinutes / 60);
-                int addHour = (int) divideBySixty;
-                double remainingMinutes = (divideBySixty - addHour);
-                remainingMinutes = (remainingMinutes * 60);
-                int a = (int) Math.round(remainingMinutes);
-                // Answer.setText(String.valueOf(a));
-
-                int b = (int) addHour + hourFirstFromString + hourFirstFromString1;
-                finalHours.setText(String.valueOf(b) + " :");
-                TextView results=findViewById(R.id.resultView);
-                 results.setVisibility(View.VISIBLE);
-
-                if (a < 10) {
-                    finalMinutes.setText(String.valueOf("0" + a));
-                    SavedNumber.setText(String.valueOf(b)+"."+String.valueOf("0"+a));
-                } else {
-                    finalMinutes.setText(String.valueOf(a));
-                    SavedNumber.setText(String.valueOf(b)+"."+String.valueOf(a));
-                }
-                //SavedTime=(finalHours+"."+finalMinutes);
-
-
-            InputMethodManager inputManager = (InputMethodManager)
-                    getSystemService(Context.INPUT_METHOD_SERVICE);
-
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //deletes keyboard
-
-
+        TotalHoursView.setText(HoursFinal+":"+MinutesFinal);
+        if (totalMinutesResult<10) {
+            TotalHoursView.setText(HoursFinal+":0"+MinutesFinal);
         }
-        i++;
-       // String stringdouble= Double.toString(userAnswer);
-       // Result.setText(stringdouble);
-        numberEntry.setText("");
-        InputMethodManager inputManager = (InputMethodManager)
-                getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                InputMethodManager.HIDE_NOT_ALWAYS);
-        //TextView finalResult = findViewById(R.id.TotalMinutesView);
-       // double finalResultDouble;
-
-        //finalResultDouble=(first+second);
-       // String stringdouble1= Double.toString(finalResultDouble);
-       // finalResult.setText(stringdouble1);
+        SavedNumber.setText(TotalHoursView.getText());
 
 
 
-        }
+
+         }
     @Override
     protected void onResume() {
         super.onResume();

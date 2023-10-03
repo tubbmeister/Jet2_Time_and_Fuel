@@ -80,22 +80,22 @@
 
     <EditText
         android:id="@+id/numberEntry"
-        android:layout_width="250dp"
+        android:layout_width="150dp"
         android:layout_height="47dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="20dp"
+
         android:background="@drawable/border"
-
         android:ems="10"
-        android:hint="Enter flight hours"
 
-        android:inputType="numberDecimal"
+        android:hint="Total Hours"
+
+        android:inputType="time"
 
         android:textAlignment="center"
-
         android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
 
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
@@ -221,7 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
-        android:text="V 7.0 "
+        android:text="V 8.0 "
         android:textColor="#0B0A0A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
@@ -247,9 +247,11 @@
         android:layout_width="90dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:background="@drawable/border"
         android:hint="Take Off"
-        android:inputType="time"
 
+        android:inputType="time"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/SavedNumber" />
 
@@ -257,8 +259,10 @@
         android:id="@+id/Landing"
         android:layout_width="90dp"
         android:layout_height="48dp"
+        android:background="@drawable/border"
         android:hint="Landing"
         android:inputType="time"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="@+id/Takeoff"
         app:layout_constraintStart_toEndOf="@+id/Takeoff"
         app:layout_constraintTop_toTopOf="@+id/Takeoff" />
@@ -268,15 +272,16 @@
         android:layout_width="90dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:text=""
-        android:gravity="center_vertical"
-        android:textAlignment="center"
-        android:textIsSelectable="true"
+        android:background="@drawable/border"
         android:focusable="true"
-        android:longClickable="true"
+        android:gravity="center_vertical"
         android:hint="Total"
+        android:longClickable="true"
+        android:text=""
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#0C0C0C"
+        android:textIsSelectable="true"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/Landing"
@@ -284,13 +289,25 @@
 
     <Button
         android:id="@+id/DurationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="84dp"
+        android:layout_height="48dp"
         android:onClick="Calculate_Duration"
         android:text="Flt Time"
+        app:layout_constraintBottom_toTopOf="@+id/Result"
+        app:layout_constraintStart_toStartOf="@+id/Result" />
+
+    <EditText
+        android:id="@+id/addFltTime"
+        android:layout_width="150dp"
+        android:layout_height="47dp"
+        android:background="@drawable/border"
+        android:ems="10"
+        android:hint="Flt Time"
+        android:inputType="time"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.797"
-        app:layout_constraintStart_toEndOf="@+id/SavedNumber"
-        app:layout_constraintTop_toTopOf="@+id/SavedNumber" />
+        app:layout_constraintStart_toEndOf="@+id/numberEntry"
+        app:layout_constraintTop_toTopOf="@+id/numberEntry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
