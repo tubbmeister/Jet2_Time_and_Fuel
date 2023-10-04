@@ -294,6 +294,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:onClick="ButtonTest"
+        android:textColor="#F7FAF9"
+        android:background="@drawable/gradient_normal"
         android:text="Calculate"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -315,9 +317,11 @@
         android:layout_width="135dp"
         android:layout_height="65dp"
         android:layout_marginEnd="16dp"
-        android:textColor="@color/colorPrimaryDark"
+
         android:onClick="Reset"
         android:textStyle="bold"
+        android:textColor="#F7FAF9"
+        android:background="@drawable/gradient_normal"
         android:text="Reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tableLayout" />

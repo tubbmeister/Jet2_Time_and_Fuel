@@ -46,6 +46,7 @@
         android:layout_height="62dp"
         android:layout_marginEnd="16dp"
         android:onClick="sendMessage"
+        android:textColor="#F7FAF9"
         android:text="@string/button_send"
         android:textSize="30sp"
         android:background="@drawable/gradient_normal"
@@ -61,6 +62,7 @@
 
         android:background="@drawable/gradient_normal"
         android:onClick="onSubmitClick"
+        android:textColor="#F7FAF9"
 
         android:text="Add Total Hours"
         android:textSize="30sp"
@@ -192,6 +194,7 @@
         android:layout_height="54dp"
         android:onClick="StartCalculator"
         android:text="Standard Calculator"
+        android:textColor="#F7FAF9"
         android:background="@drawable/gradient_normal"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -276,10 +279,12 @@
         android:layout_width="90dp"
         android:layout_height="48dp"
         android:layout_marginTop="34dp"
-        android:text="Flt Time"
-
         android:background="@drawable/gradient_normal"
         android:onClick="Calculate_Duration"
+
+        android:text="Flt Time"
+        android:textColor="#F7FAF9"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/Result"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
