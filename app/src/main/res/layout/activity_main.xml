@@ -148,7 +148,7 @@
             android:background="#BA2015"
             android:gravity="center"
             android:padding="1dp"
-
+            android:visibility="invisible"
             android:weightSum="1">
 
             <!-- first element of the row-->
