@@ -191,16 +191,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         dur=dur.plus(dur1);
 
       //  difference=Second_Time.plusHours( dur.getHour()).plusMinutes(First_Time.getMinute());
-        long totalMinutes=dur.toMinutes();
-        int totalMinutesInt= (int) totalMinutes;
-        int totalHours=(totalMinutesInt/60);
-        int totalMinutesResult=(totalMinutesInt-(totalHours*60));
+        long totalMinutes=dur.toMinutes(); //use the Duration property to convert to minutes to actually do the calculation
+        int totalMinutesInt= (int) totalMinutes; //convert long to int
+        int totalHours=(totalMinutesInt/60); //number of hours
+        int totalMinutesResult=(totalMinutesInt-(totalHours*60));//remainder of minutes
         String HoursFinal=Integer.toString(totalHours);
         String MinutesFinal=Integer.toString(totalMinutesResult);
 
-        TotalHoursView.setText(HoursFinal+":"+MinutesFinal);
+        TotalHoursView.setText(HoursFinal+":"+MinutesFinal); //display total time as a string
         if (totalMinutesResult<10) {
-            TotalHoursView.setText(HoursFinal+":0"+MinutesFinal);
+            TotalHoursView.setText(HoursFinal+":0"+MinutesFinal); //make answer look like a time if less than 10 mins
         }
         SavedNumber.setText(TotalHoursView.getText());
 
