@@ -23,18 +23,7 @@
         app:layout_constraintStart_toEndOf="@+id/hours1"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
-    <TextView
-        android:id="@+id/minutes2"
-        android:layout_width="46dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="6dp"
-        android:textColor="#0B0A0A"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
-        app:layout_constraintStart_toEndOf="@+id/hours2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
 
     <EditText
         android:id="@+id/editTextTextPersonName"
@@ -59,6 +48,7 @@
         android:onClick="sendMessage"
         android:text="@string/button_send"
         android:textSize="30sp"
+        android:background="@drawable/gradient_normal"
         app:layout_constraintBaseline_toBaselineOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -69,9 +59,10 @@
         android:layout_width="343dp"
         android:layout_height="61dp"
 
+        android:background="@drawable/gradient_normal"
         android:onClick="onSubmitClick"
 
-        android:text="Hours Calculator"
+        android:text="Add Total Hours"
         android:textSize="30sp"
 
         app:layout_constraintLeft_toLeftOf="parent"
@@ -131,7 +122,6 @@
 
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
 
         android:measureWithLargestChild="true"
         android:stretchColumns="*"
@@ -182,26 +172,17 @@
             <TextView
                 android:id="@+id/TotalHoursView"
                 android:layout_width="match_parent"
+                android:textAlignment="center"
 
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_marginStart="1dp"
                 android:layout_weight="0"
-                android:textAlignment="textEnd"
+
                 android:textColor="#0B0A0A"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/TotalMinutesView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_column="1"
-                android:layout_marginStart="1dp"
-                android:layout_weight="0"
-                android:textColor="#0B0A0A"
-                android:textSize="30sp"
-                android:textStyle="bold" />
         </TableRow>
     </TableLayout>
 
@@ -211,6 +192,7 @@
         android:layout_height="54dp"
         android:onClick="StartCalculator"
         android:text="Standard Calculator"
+        android:background="@drawable/gradient_normal"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -259,6 +241,7 @@
         android:id="@+id/Landing"
         android:layout_width="90dp"
         android:layout_height="48dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/border"
         android:hint="Landing"
         android:inputType="time"
@@ -287,14 +270,18 @@
         app:layout_constraintStart_toEndOf="@+id/Landing"
         app:layout_constraintTop_toTopOf="@+id/Landing" />
 
+
     <Button
         android:id="@+id/DurationButton"
-        android:layout_width="84dp"
+        android:layout_width="90dp"
         android:layout_height="48dp"
-        android:onClick="Calculate_Duration"
+        android:layout_marginTop="34dp"
         android:text="Flt Time"
-        app:layout_constraintBottom_toTopOf="@+id/Result"
-        app:layout_constraintStart_toStartOf="@+id/Result" />
+
+        android:background="@drawable/gradient_normal"
+        android:onClick="Calculate_Duration"
+        app:layout_constraintEnd_toEndOf="@+id/Result"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <EditText
         android:id="@+id/addFltTime"

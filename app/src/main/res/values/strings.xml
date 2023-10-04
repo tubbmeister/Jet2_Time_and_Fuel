@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Time and Fuel and Calc</string>
     <string name="edit_message">Enter a Message</string>
-    <string name="button_send">Fuel Calculator ---->k</string>
+    <string name="button_send">Fuel Calculator </string>
     <string name="title_activity_hours_calculator">HoursCalculator</string>
     <!--
     This string is used for square devices and overridden by hello_world in
