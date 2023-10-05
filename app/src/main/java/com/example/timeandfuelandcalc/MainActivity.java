@@ -155,8 +155,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView TotalHoursView=findViewById(R.id.TotalHoursView);
 
         String TotalFlightTime=numberEntry.getText().toString();
+
+
+
         if(TextUtils.isEmpty(TotalFlightTime)){
             numberEntry.setError("Add Time!");
+            return;
         }
         String newFltTime=addFltTime.getText().toString();
         if(TextUtils.isEmpty(newFltTime)){
