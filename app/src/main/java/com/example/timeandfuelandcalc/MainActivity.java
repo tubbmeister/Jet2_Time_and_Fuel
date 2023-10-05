@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String TakeoffTime=Takeoff.getText().toString();
         if(TextUtils.isEmpty(TakeoffTime)){
             Takeoff.setError("Add Time!");
+            return;
         }
         String LandingTime=Landing.getText().toString();
         if(TextUtils.isEmpty(LandingTime)){
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         difference=Second_Time.minusHours( First_Time.getHour()).minusMinutes(First_Time.getMinute());
 
         Result.setText(difference.toString());
+        addFltTime.setText(Result.getText());
 
     }
     public void onClick(View v){
